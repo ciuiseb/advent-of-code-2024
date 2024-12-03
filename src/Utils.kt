@@ -20,4 +20,5 @@ fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteA
  */
 fun Any?.println() = println(this)
 
+
 fun String.parseNumbers(): List<Int> = this.split(" ").map(String::toInt)
