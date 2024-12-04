@@ -1,62 +1,18 @@
 fun main() {
 
-    fun checkXMASHorizontally(input: List<CharArray>, row: Int, column: Int): Long {
-        return runCatching {
-            val candidate = input[row].slice(column until column + 4).joinToString("")
-            if (candidate == "XMAS" || candidate.reversed() == "XMAS") {
-                1L
-            } else {
-                0L
-            }
-        }.getOrDefault(0L)
-    }
-
-    fun checkXMASVertically(input: List<CharArray>, row: Int, column: Int): Long {
-        return runCatching {
-            val candidate = input.map { it[column] }.slice(row until row + 4).joinToString("")
-            if (candidate == "XMAS" || candidate.reversed() == "XMAS") {
-                1L
-            } else {
-                0L
-            }
-        }.getOrDefault(0L)
-    }
-
-    fun checkXMASLeftDiagonally(input: List<CharArray>, row: Int, column: Int): Long {
-        return runCatching {
-            val candidate = buildString {
-                for (i in 0 until 4) {
-                    append(input[row + i][column - i])
-                }
-            }
-            if (candidate == "XMAS" || candidate.reversed() == "XMAS") {
-                1L
-            } else {
-                0L
-            }
-        }.getOrDefault(0L)
-    }
-
-    fun checkXMASRightDiagonally(input: List<CharArray>, row: Int, column: Int): Long {
-        return runCatching {
-            val candidate = buildString {
-                for (i in 0 until 4) {
-                    append(input[row + i][column + i])
-                }
-            }
-            if (candidate == "XMAS" || candidate.reversed() == "XMAS") {
-                1L
-            } else {
-                0L
-            }
-        }.getOrDefault(0L)
-    }
-
     fun checkXMAS(input: List<CharArray>, row: Int, column: Int): Long {
-        return checkXMASHorizontally(input, row, column) +
-                checkXMASVertically(input, row, column) +
-                checkXMASLeftDiagonally(input, row, column) +
-                checkXMASRightDiagonally(input, row, column)
+        val directions = listOf<Pair<Int, Int>>(Pair(0, 1), Pair(1, 0), Pair(1, 1), Pair(1, -1))
+
+        return directions.sumOf { (rowOffset, columnOffset) ->
+            runCatching {
+                val candidate = buildString {
+                    for (i in 0 until 4) {
+                        append(input[row + i * rowOffset][column + i * columnOffset])
+                    }
+                }
+                if (candidate == "XMAS" || candidate.reversed() == "XMAS") 1L else 0L
+            }.getOrDefault(0L)
+        }
     }
 
     fun checkX_MAS(input: List<CharArray>, row: Int, column: Int): Long {
@@ -72,7 +28,8 @@ fun main() {
                 }
             }
             if ((leftSide == "MAS" || leftSide.reversed() == "MAS") &&
-                (rightSide == "MAS" || rightSide.reversed() == "MAS")) {
+                (rightSide == "MAS" || rightSide.reversed() == "MAS")
+            ) {
                 1L
             } else {
                 0L
