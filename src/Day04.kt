@@ -1,7 +1,9 @@
 fun main() {
-
     fun checkXMAS(input: List<CharArray>, row: Int, column: Int): Long {
-        val directions = listOf<Pair<Int, Int>>(Pair(0, 1), Pair(1, 0), Pair(1, 1), Pair(1, -1))
+        val directions = listOf<Pair<Int, Int>>(
+            Pair(0, 1), Pair(1, 0), Pair(1, 1), Pair(1, -1),
+            Pair(0, -1), Pair(-1, 0), Pair(-1, -1), Pair(-1, 1)
+        )
 
         return directions.sumOf { (rowOffset, columnOffset) ->
             runCatching {
@@ -40,7 +42,7 @@ fun main() {
     fun solvePartOne(input: List<CharArray>): Long {
         return input.mapIndexed { rowIndex, row ->
             row.mapIndexed { columnIndex, char ->
-                if (char == 'X' || char == 'S') checkXMAS(input, rowIndex, columnIndex) else 0L
+                if (char == 'X') checkXMAS(input, rowIndex, columnIndex) else 0L
             }.sum()
         }.sum()
     }
