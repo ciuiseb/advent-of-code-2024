@@ -17,14 +17,14 @@ fun main() {
         return Pair(rules, updates)
     }
 
-    fun Int.canComeBefore(nextPage: Int, rules: Map<Int, List<Int>>): Boolean =
+    fun Int.cantComeBefore(nextPage: Int, rules: Map<Int, List<Int>>): Boolean =
         rules[nextPage]?.contains(this) == true
 
     fun List<Int>.hasCorrectPageOrder(rules: Map<Int, List<Int>>): Boolean {
         forEachIndexed { index, currentPage ->
             val nextPages = this.drop(index)
 
-            if (nextPages.any { nextPage -> currentPage.canComeBefore(nextPage, rules) }) {
+            if (nextPages.any { nextPage -> currentPage.cantComeBefore(nextPage, rules) }) {
                 return false
             }
         }
@@ -39,7 +39,7 @@ fun main() {
         while (remaining.isNotEmpty()) {
             val nextPage = remaining.find { page ->
                 remaining.none { otherPage ->
-                    page.canComeBefore(otherPage, rules)
+                    page.cantComeBefore(otherPage, rules)
                 }
             } ?: error("")
 
