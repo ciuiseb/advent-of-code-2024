@@ -21,14 +21,14 @@ fun main() {
 
     fun solvePartOne(input: List<String>): Int {
         return input.asSequence()
-            .map {it.parseNumbers()}
+            .map {it.parseNumbers(" ")}
             .filter { isSafe(it) }
             .count()
     }
 
     fun solvePartTwo(input: List<String>): Int {
         return input.asSequence()
-            .map {it.parseNumbers()}
+            .map {it.parseNumbers(" ")}
             .filter { isSafeWithProblemDampener(it) }
             .count()
     }
