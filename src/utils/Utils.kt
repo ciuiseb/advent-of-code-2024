@@ -1,3 +1,5 @@
+package utils
+
 import java.math.BigInteger
 import java.security.MessageDigest
 import kotlin.io.path.Path
@@ -20,16 +22,23 @@ fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteA
  */
 fun Any?.println() = println(this)
 
-
+/**
+ * Converts a string to a list of numbers
+ */
 fun String.parseNumbers(separator: String): List<Int> = this.split(separator).map(String::toInt)
 
+/**
+ * Gets the middle element of a list
+ */
 fun <T> List<T>.middle(): T = get(size/2)
 
-data class Position(val x: Int, val y: Int) {
-    operator fun plus(other: Position): Position = Position(this.x + other.x, this.y + other.y)
-}
-
+/**
+ * Gets an element from a matrix based on Position
+ */
 fun <T> List<List<T>>.get(position: Position): T = this[position.x][position.y]
+/**
+ * Sets an element of a matrix based on Position
+ */
 fun <T> List<MutableList<T>>.set(position: Position, newValue: T) {
     this[position.x][position.y] = newValue
 }

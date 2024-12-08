@@ -1,3 +1,6 @@
+import utils.println
+import utils.readInput
+
 fun main() {
     fun Long.concatenate(other: Long): Long = (this.toString() + other.toString()).toLong()
 

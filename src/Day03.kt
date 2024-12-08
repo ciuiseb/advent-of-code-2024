@@ -1,3 +1,6 @@
+import utils.println
+import utils.readInput
+
 fun main() {
     class MemoryState(var enabled: Boolean = true)
 

@@ -1,3 +1,6 @@
+import utils.println
+import utils.readInput
+
 fun main() {
     fun checkXMAS(input: List<CharArray>, row: Int, column: Int): Long {
         val directions = listOf<Pair<Int, Int>>(

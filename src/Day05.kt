@@ -1,3 +1,8 @@
+import utils.middle
+import utils.parseNumbers
+import utils.println
+import utils.readInput
+
 fun main() {
 
     fun getRules(rulesList: List<String>): Map<Int, List<Int>> = rulesList

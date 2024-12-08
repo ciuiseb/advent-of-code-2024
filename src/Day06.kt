@@ -1,3 +1,5 @@
+import utils.*
+
 enum class GuardDirection(val symbol: Char) {
     FORWARD('^'),
     BACKWARD('v'),
