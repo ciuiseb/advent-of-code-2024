@@ -8,13 +8,21 @@ enum class TrailDirections(val position: Position) {
 }
 
 fun main() {
-    fun Grid.getNeighboursGreaterWithOne(value: Int, position: Position): List<Position> =
+    fun Grid<Int>.getNeighbours(position: Position): List<Position> = buildList {
+        TrailDirections.entries.forEach {
+            val neighbourPosition = position + it.position
+
+            if (isInBounds(neighbourPosition)) add(neighbourPosition)
+        }
+    }
+
+    fun Grid<Int>.getNeighboursGreaterWithOne(value: Int, position: Position): List<Position> =
         getNeighbours(position).filter { neighbourPosition ->
-            map[neighbourPosition.x][neighbourPosition.y] == value + 1
+            get(neighbourPosition) == value + 1
         }
 
-    fun Grid.backtrack(position: Position): List<Position> {
-        val currentValue = map[position.x][position.y]
+    fun Grid<Int>.backtrack(position: Position): List<Position> {
+        val currentValue = get(position)
         val neighbours = getNeighboursGreaterWithOne(currentValue, position)
 
         if (neighbours.isEmpty()) return if (currentValue == 9) listOf(position) else emptyList()
@@ -24,13 +32,13 @@ fun main() {
         }
     }
 
-    fun Grid.getTailsForTrailHead(position: Position): Long = backtrack(position).toSet().size.toLong()
+    fun Grid<Int>.getTailsForTrailHead(position: Position): Long = backtrack(position).toSet().size.toLong()
 
 
-    fun Grid.getTrailsForTrailHead(position: Position): Long = backtrack(position).size.toLong()
+    fun Grid<Int>.getTrailsForTrailHead(position: Position): Long = backtrack(position).size.toLong()
 
 
-    fun Grid.getPotentialTrailHeads(): List<Position> = buildList {
+    fun Grid<Int>.getPotentialTrailHeads(): List<Position> = buildList {
         this@getPotentialTrailHeads.map.forEachIndexed { rowIndex, row ->
             row.forEachIndexed { columnIndex, number ->
                 if (number == 0)
@@ -39,11 +47,11 @@ fun main() {
         }
     }
 
-    fun solvePartOne(grid: Grid): Long = grid.getPotentialTrailHeads()
+    fun solvePartOne(grid: Grid<Int>): Long = grid.getPotentialTrailHeads()
         .sumOf { grid.getTailsForTrailHead(it) }
 
 
-    fun solvePartTwo(grid: Grid): Long = grid.getPotentialTrailHeads()
+    fun solvePartTwo(grid: Grid<Int>): Long = grid.getPotentialTrailHeads()
         .sumOf { grid.getTrailsForTrailHead(it) }
 
     val lines: List<String> = readInput("Day10")
