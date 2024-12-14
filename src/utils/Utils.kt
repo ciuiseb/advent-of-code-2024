@@ -42,3 +42,5 @@ fun <T> List<List<T>>.get(position: Position): T = this[position.x][position.y]
 fun <T> List<MutableList<T>>.set(position: Position, newValue: T) {
     this[position.x][position.y] = newValue
 }
+
+fun String.substringBetween(after: String, before: String) = substringAfter(after).substringBefore(before)
