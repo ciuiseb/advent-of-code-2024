@@ -1,6 +1,6 @@
 import utils.*
 
-class PlotGrid(map: List<List<Char>>) : Grid<Char>(map) {
+class PlotGrid(map: MutableList<MutableList<Char>>) : Grid<Char>(map) {
     fun getNeighbours(position: Position): List<Position> =
         getNeighbouringPositions(position).filter { isInBounds(it) }
 
@@ -178,7 +178,7 @@ fun main() {
             }
 
 
-    val lines = readInput("Day12").map { it.toList() }
+    val lines = readInput("Day12").map { it.toMutableList() }.toMutableList()
     val grid = PlotGrid(lines)
     "---------- Part 1 ----------".println()
     solvePartOne(grid).println()
