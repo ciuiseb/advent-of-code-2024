@@ -55,7 +55,7 @@ fun main() {
         .sumOf { grid.getTrailsForTrailHead(it) }
 
     val lines: List<String> = readInput("Day10")
-    val map = lines.map { line -> line.map { it.digitToInt() } }
+    val map = lines.map { line -> line.map { it.digitToInt() }.toMutableList() }.toMutableList()
     val grid = Grid(map)
 
     "---------- Part 1 ----------".println()
